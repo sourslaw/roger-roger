@@ -398,6 +398,7 @@ body {
   background: #9fd4ff;
   box-shadow: 0 0 0 6px rgba(120, 186, 255, 0.08);
   cursor: pointer;
+  animation: hotspot-pulse 2.1s ease-in-out infinite;
 }
 
 .hotspot-btn::after {
@@ -425,11 +426,23 @@ body {
 .hotspot-btn.is-seen {
   border-color: #7af79d;
   background: #7af79d;
+  box-shadow: 0 0 0 8px rgba(122, 247, 157, 0.1);
+}
+
+.hotspot-btn.is-locked {
+  border-color: #8f99ad;
+  background: #8f99ad;
+  opacity: 0.82;
 }
 
 .hotspot-btn:hover::after,
 .hotspot-btn:focus-visible::after {
   opacity: 1;
+}
+
+@keyframes hotspot-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(159, 212, 255, 0.3); }
+  50% { box-shadow: 0 0 0 10px rgba(159, 212, 255, 0.06); }
 }
 
 .room-nav {
