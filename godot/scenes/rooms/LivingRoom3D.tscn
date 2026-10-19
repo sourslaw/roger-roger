@@ -773,3 +773,96 @@ theme_override_font_sizes/font_size = 22
 text = "+"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="TouchControls" type="Control" parent="HUD"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="MoveZone" type="Panel" parent="HUD/TouchControls"]
+anchors_preset = 3
+anchor_top = 0.5
+anchor_right = 0.48
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = -16.0
+offset_right = -8.0
+offset_bottom = -12.0
+mouse_filter = 1
+self_modulate = Color(1, 1, 1, 0.2)
+
+[node name="MoveLabel" type="Label" parent="HUD/TouchControls/MoveZone"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.0
+offset_top = -12.0
+offset_right = 28.0
+offset_bottom = 12.0
+theme_override_font_sizes/font_size = 16
+text = "MOVE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LookZone" type="Panel" parent="HUD/TouchControls"]
+anchors_preset = 9
+anchor_left = 0.52
+anchor_top = 0.3
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 0.0
+offset_right = -12.0
+offset_bottom = -12.0
+mouse_filter = 1
+self_modulate = Color(1, 1, 1, 0.1)
+
+[node name="LookLabel" type="Label" parent="HUD/TouchControls/LookZone"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -98.0
+offset_top = 14.0
+offset_right = -14.0
+offset_bottom = 36.0
+theme_override_font_sizes/font_size = 16
+text = "LOOK"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="InteractButton" type="Button" parent="HUD/TouchControls"]
+anchors_preset = 3
+anchor_left = 0.7
+anchor_top = 0.78
+anchor_right = 0.88
+anchor_bottom = 0.9
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+mouse_filter = 1
+theme_override_font_sizes/font_size = 16
+text = "INTERACT"
+
+[node name="SprintButton" type="Button" parent="HUD/TouchControls"]
+anchors_preset = 3
+anchor_left = 0.7
+anchor_top = 0.91
+anchor_right = 0.88
+anchor_bottom = 0.99
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+mouse_filter = 1
+theme_override_font_sizes/font_size = 15
+text = "SPRINT"

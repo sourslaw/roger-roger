@@ -26,6 +26,7 @@ Current default controls in the main scene:
 - Look at a hotspot and click or press `E` to interact
 - `Esc` to release cursor
 - Floating marker orbs show where interactables are located
+- Touchscreen/mobile: left zone moves, right zone looks, `INTERACT` taps clues, `SPRINT` boosts movement
 
 The 3D HUD now includes:
 

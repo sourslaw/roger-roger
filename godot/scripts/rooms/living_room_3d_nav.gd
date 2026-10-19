@@ -3,6 +3,9 @@ extends Node3D
 @export var move_speed := 4.5
 @export var sprint_multiplier := 1.7
 @export var mouse_sensitivity := 0.0022
+@export var touch_look_sensitivity := 0.003
+@export var touch_move_radius := 120.0
+@export var force_touch_controls := false
 @export var min_pitch_deg := -75.0
 @export var max_pitch_deg := 75.0
 @export var interact_distance := 12.0
@@ -33,6 +36,11 @@ const MARKER_STATE_EMISSION := {
 @onready var notebook_label: Label = $HUD/NotebookPanel/NotebookLabel
 @onready var focus_label: Label = $HUD/FocusPanel/FocusLabel
 @onready var clue_log_label: Label = $HUD/ClueLogPanel/ClueLogLabel
+@onready var touch_controls: Control = $HUD/TouchControls
+@onready var touch_move_zone: Control = $HUD/TouchControls/MoveZone
+@onready var touch_look_zone: Control = $HUD/TouchControls/LookZone
+@onready var touch_interact_button: Button = $HUD/TouchControls/InteractButton
+@onready var touch_sprint_button: Button = $HUD/TouchControls/SprintButton
 @onready var fire_light: OmniLight3D = $FireLight
 @onready var firebox: MeshInstance3D = $Firebox
 @onready var moon_floor_patch: MeshInstance3D = $MoonFloorPatch
@@ -77,6 +85,12 @@ var _marker_materials: Dictionary = {}
 var _marker_state_cache: Dictionary = {}
 var _marker_time := 0.0
 var _focus_message_hold_remaining := 0.0
+var _touch_enabled := false
+var _touch_move_input := Vector2.ZERO
+var _touch_move_origin := Vector2.ZERO
+var _touch_move_finger := -1
+var _touch_look_finger := -1
+var _touch_sprint_pressed := false
 
 func _ready() -> void:
 	GameState.reset()
@@ -110,11 +124,24 @@ func _ready() -> void:
 
 	set_process(true)
 	set_process_input(true)
+	_setup_touch_controls()
 	_refresh_notebook_ui()
 	_set_focus_text("Look at an object and click or press E to interact.")
 	_set_focus_target("")
 
 func _input(event: InputEvent) -> void:
+	if (event is InputEventScreenTouch or event is InputEventScreenDrag) and not _touch_enabled:
+		_touch_enabled = true
+		_activate_touch_controls()
+
+	if _touch_enabled:
+		if event is InputEventScreenTouch:
+			_handle_touch_press(event)
+			return
+		if event is InputEventScreenDrag:
+			_handle_touch_drag(event)
+			return
+
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 		if Input.get_mouse_mode() != Input.MOUSE_MODE_CAPTURED:
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -153,6 +180,9 @@ func _process(delta: float) -> void:
 		move_input.y -= 1.0
 	if _is_any_key_pressed([KEY_S, KEY_DOWN]):
 		move_input.y += 1.0
+	move_input += _touch_move_input
+	if move_input.length() > 1.0:
+		move_input = move_input.normalized()
 
 	_update_controls_label(move_input)
 	_update_focus_hover()
@@ -168,7 +198,8 @@ func _process(delta: float) -> void:
 	right.y = 0.0
 	right = right.normalized()
 
-	var speed := move_speed * (sprint_multiplier if _is_any_key_pressed([KEY_SHIFT]) else 1.0)
+	var sprinting := _is_any_key_pressed([KEY_SHIFT]) or _touch_sprint_pressed
+	var speed := move_speed * (sprint_multiplier if sprinting else 1.0)
 	var forward_input := -move_input.y
 	var velocity := (right * move_input.x + forward * forward_input) * speed
 	camera.global_position += velocity * delta
@@ -438,9 +469,15 @@ func _update_controls_label(move_input: Vector2) -> void:
 		active_inputs.append("D/Right")
 	if _is_any_key_pressed([KEY_SHIFT]):
 		active_inputs.append("Shift")
+	if _touch_sprint_pressed:
+		active_inputs.append("TouchSprint")
 	if active_inputs.is_empty():
 		active_inputs.append("None")
-	controls_label.text = "Click to capture mouse | WASD/Arrows move | Shift sprint | Esc release\nInputs: %s | Move Vec: (%.1f, %.1f) | Pos: (%.2f, %.2f, %.2f)" % [
+	var controls_prefix := "Click to capture mouse | WASD/Arrows move | Shift sprint | Esc release"
+	if _touch_enabled:
+		controls_prefix = "Touch: left zone move | right zone look | INTERACT | SPRINT"
+	controls_label.text = "%s\nInputs: %s | Move Vec: (%.1f, %.1f) | Pos: (%.2f, %.2f, %.2f)" % [
+		controls_prefix,
 		", ".join(active_inputs),
 		move_input.x,
 		move_input.y,
@@ -499,3 +536,68 @@ func _is_any_key_pressed(keycodes: Array[Key]) -> bool:
 		if bool(_pressed_keys.get(code, false)):
 			return true
 	return false
+
+func _setup_touch_controls() -> void:
+	_touch_enabled = force_touch_controls or DisplayServer.is_touchscreen_available()
+	_activate_touch_controls()
+
+func _activate_touch_controls() -> void:
+	if is_instance_valid(touch_controls):
+		touch_controls.visible = _touch_enabled
+	if not _touch_enabled:
+		return
+	if is_instance_valid(touch_interact_button) and not touch_interact_button.pressed.is_connected(_on_touch_interact_pressed):
+		touch_interact_button.pressed.connect(_on_touch_interact_pressed)
+	if is_instance_valid(touch_sprint_button):
+		if not touch_sprint_button.button_down.is_connected(_on_touch_sprint_down):
+			touch_sprint_button.button_down.connect(_on_touch_sprint_down)
+		if not touch_sprint_button.button_up.is_connected(_on_touch_sprint_up):
+			touch_sprint_button.button_up.connect(_on_touch_sprint_up)
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+
+func _handle_touch_press(event: InputEventScreenTouch) -> void:
+	var touch_pos: Vector2 = event.position
+	if event.pressed:
+		if _touch_move_finger == -1 and _is_touch_in_zone(touch_move_zone, touch_pos):
+			_touch_move_finger = event.index
+			_touch_move_origin = touch_pos
+			_touch_move_input = Vector2.ZERO
+			return
+		if _touch_look_finger == -1 and _is_touch_in_zone(touch_look_zone, touch_pos):
+			_touch_look_finger = event.index
+			return
+		return
+
+	if event.index == _touch_move_finger:
+		_touch_move_finger = -1
+		_touch_move_input = Vector2.ZERO
+	if event.index == _touch_look_finger:
+		_touch_look_finger = -1
+
+func _handle_touch_drag(event: InputEventScreenDrag) -> void:
+	if event.index == _touch_move_finger:
+		var delta: Vector2 = event.position - _touch_move_origin
+		if delta.length() > touch_move_radius:
+			delta = delta.normalized() * touch_move_radius
+		var normalized: Vector2 = delta / max(touch_move_radius, 1.0)
+		_touch_move_input = Vector2(normalized.x, normalized.y)
+		return
+
+	if event.index == _touch_look_finger:
+		_yaw -= event.relative.x * touch_look_sensitivity
+		_pitch = clamp(_pitch - event.relative.y * touch_look_sensitivity, deg_to_rad(min_pitch_deg), deg_to_rad(max_pitch_deg))
+		camera.rotation = Vector3(_pitch, _yaw, 0.0)
+
+func _is_touch_in_zone(zone: Control, position: Vector2) -> bool:
+	if not is_instance_valid(zone):
+		return false
+	return zone.get_global_rect().has_point(position)
+
+func _on_touch_interact_pressed() -> void:
+	_try_interact()
+
+func _on_touch_sprint_down() -> void:
+	_touch_sprint_pressed = true
+
+func _on_touch_sprint_up() -> void:
+	_touch_sprint_pressed = false
