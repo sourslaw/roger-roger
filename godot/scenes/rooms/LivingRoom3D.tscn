@@ -1,0 +1,775 @@
+[gd_scene load_steps=51 format=3]
+
+[ext_resource type="Script" path="res://scripts/rooms/living_room_3d_nav.gd" id="1_3dnav"]
+[ext_resource type="PackedScene" path="res://assets/models/dog/GermanShepherdLying.glb" id="2_dogmesh"]
+
+[sub_resource type="Environment" id="Environment_1"]
+background_mode = 1
+background_color = Color(0.025, 0.03, 0.045, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.12, 0.14, 0.18, 1)
+ambient_light_energy = 0.6
+tonemap_mode = 2
+glow_enabled = true
+glow_bloom = 0.1
+ssao_enabled = true
+ssr_enabled = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_floor"]
+size = Vector2(14, 10)
+
+[sub_resource type="StandardMaterial3D" id="Mat_floor"]
+albedo_color = Color(0.13, 0.1, 0.08, 1)
+roughness = 0.92
+
+[sub_resource type="BoxMesh" id="BoxMesh_wall_back"]
+size = Vector3(14, 3.4, 0.2)
+
+[sub_resource type="StandardMaterial3D" id="Mat_wall"]
+albedo_color = Color(0.2, 0.16, 0.13, 1)
+roughness = 0.95
+
+[sub_resource type="BoxMesh" id="BoxMesh_wall_side"]
+size = Vector3(0.2, 3.4, 10)
+
+[sub_resource type="BoxMesh" id="BoxMesh_generic"]
+size = Vector3(1, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_wood_dark"]
+albedo_color = Color(0.22, 0.15, 0.11, 1)
+roughness = 0.86
+
+[sub_resource type="StandardMaterial3D" id="Mat_wood_mid"]
+albedo_color = Color(0.34, 0.23, 0.16, 1)
+roughness = 0.74
+
+[sub_resource type="StandardMaterial3D" id="Mat_sofa"]
+albedo_color = Color(0.19, 0.13, 0.1, 1)
+roughness = 0.9
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_rug"]
+size = Vector2(3.8, 2.6)
+
+[sub_resource type="StandardMaterial3D" id="Mat_rug"]
+albedo_color = Color(0.32, 0.16, 0.12, 1)
+roughness = 1.0
+
+[sub_resource type="StandardMaterial3D" id="Mat_fire_inner"]
+albedo_color = Color(1, 0.42, 0.14, 1)
+emission_enabled = true
+emission = Color(1, 0.34, 0.1, 1)
+emission_energy_multiplier = 2.4
+roughness = 0.2
+
+[sub_resource type="StandardMaterial3D" id="Mat_window_glass"]
+transparency = 1
+albedo_color = Color(0.36, 0.48, 0.62, 0.24)
+roughness = 0.12
+metallic = 0.05
+
+[sub_resource type="QuadMesh" id="QuadMesh_window"]
+size = Vector2(2.2, 1.4)
+
+[sub_resource type="QuadMesh" id="QuadMesh_moonbeam"]
+size = Vector2(2.8, 2.6)
+
+[sub_resource type="StandardMaterial3D" id="Mat_moonbeam"]
+transparency = 1
+albedo_color = Color(0.5, 0.62, 0.74, 0.1)
+emission_enabled = true
+emission = Color(0.44, 0.58, 0.72, 1)
+emission_energy_multiplier = 0.35
+shading_mode = 0
+depth_draw_mode = 1
+cull_mode = 2
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_moonpatch"]
+size = Vector2(2.8, 1.7)
+
+[sub_resource type="StandardMaterial3D" id="Mat_moonpatch"]
+transparency = 1
+albedo_color = Color(0.46, 0.58, 0.7, 0.08)
+emission_enabled = true
+emission = Color(0.44, 0.58, 0.72, 1)
+emission_energy_multiplier = 0.22
+shading_mode = 0
+depth_draw_mode = 1
+cull_mode = 2
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_mooncore"]
+size = Vector2(1.36, 0.9)
+
+[sub_resource type="StandardMaterial3D" id="Mat_mooncore"]
+transparency = 1
+albedo_color = Color(0.7, 0.82, 0.96, 0.12)
+emission_enabled = true
+emission = Color(0.66, 0.8, 0.96, 1)
+emission_energy_multiplier = 0.36
+shading_mode = 0
+depth_draw_mode = 1
+cull_mode = 2
+
+[sub_resource type="StandardMaterial3D" id="Mat_trim_beam"]
+albedo_color = Color(0.17, 0.12, 0.09, 1)
+roughness = 0.78
+
+[sub_resource type="StandardMaterial3D" id="Mat_shelf_wood"]
+albedo_color = Color(0.31, 0.21, 0.14, 1)
+roughness = 0.73
+
+[sub_resource type="StandardMaterial3D" id="Mat_book_spine"]
+albedo_color = Color(0.55, 0.36, 0.2, 1)
+emission_enabled = true
+emission = Color(0.32, 0.18, 0.06, 1)
+emission_energy_multiplier = 0.08
+roughness = 0.66
+
+[sub_resource type="StandardMaterial3D" id="Mat_frame_dark"]
+albedo_color = Color(0.13, 0.1, 0.08, 1)
+roughness = 0.82
+
+[sub_resource type="StandardMaterial3D" id="Mat_canvas_warm"]
+albedo_color = Color(0.62, 0.52, 0.4, 1)
+emission_enabled = true
+emission = Color(0.52, 0.42, 0.28, 1)
+emission_energy_multiplier = 0.08
+roughness = 0.9
+
+[sub_resource type="StandardMaterial3D" id="Mat_dog_fur"]
+albedo_color = Color(0.78, 0.67, 0.48, 1)
+roughness = 0.92
+
+[sub_resource type="StandardMaterial3D" id="Mat_dog_nose"]
+albedo_color = Color(0.13, 0.1, 0.09, 1)
+roughness = 0.58
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_dog_body"]
+radius = 0.32
+mid_height = 0.64
+
+[sub_resource type="SphereMesh" id="SphereMesh_dog_head"]
+radius = 0.24
+height = 0.48
+
+[sub_resource type="StandardMaterial3D" id="Mat_table_top"]
+albedo_color = Color(0.4, 0.26, 0.17, 1)
+roughness = 0.58
+
+[sub_resource type="SphereShape3D" id="SphereShape_hotspot"]
+radius = 0.45
+
+[sub_resource type="SphereShape3D" id="SphereShape_hotspot_dog"]
+radius = 0.72
+
+[sub_resource type="StandardMaterial3D" id="Mat_glass_interact"]
+transparency = 1
+albedo_color = Color(0.92, 0.96, 1, 0.34)
+emission_enabled = true
+emission = Color(0.55, 0.75, 1, 1)
+emission_energy_multiplier = 0.45
+roughness = 0.04
+
+[sub_resource type="StandardMaterial3D" id="Mat_card_paper"]
+albedo_color = Color(0.94, 0.91, 0.84, 1)
+roughness = 0.62
+
+[sub_resource type="StandardMaterial3D" id="Mat_card_stamp"]
+albedo_color = Color(0.2, 0.11, 0.08, 1)
+emission_enabled = true
+emission = Color(0.95, 0.72, 0.44, 1)
+emission_energy_multiplier = 0.34
+roughness = 0.45
+
+[sub_resource type="StandardMaterial3D" id="Mat_brass_interact"]
+albedo_color = Color(0.72, 0.56, 0.22, 1)
+emission_enabled = true
+emission = Color(1, 0.82, 0.42, 1)
+emission_energy_multiplier = 0.42
+roughness = 0.35
+metallic = 0.55
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_flute_stem"]
+top_radius = 0.015
+bottom_radius = 0.018
+height = 0.22
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_flute_bowl"]
+top_radius = 0.07
+bottom_radius = 0.038
+height = 0.17
+
+[sub_resource type="BoxMesh" id="BoxMesh_card"]
+size = Vector3(0.18, 0.01, 0.1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_knob"]
+top_radius = 0.045
+bottom_radius = 0.045
+height = 0.06
+
+[sub_resource type="BoxMesh" id="BoxMesh_plaque"]
+size = Vector3(0.16, 0.07, 0.025)
+
+[sub_resource type="StandardMaterial3D" id="Mat_target_glow"]
+transparency = 1
+albedo_color = Color(1, 0.86, 0.42, 0.2)
+emission_enabled = true
+emission = Color(1, 0.82, 0.36, 1)
+emission_energy_multiplier = 1.25
+shading_mode = 0
+depth_draw_mode = 1
+cull_mode = 2
+
+[sub_resource type="SphereMesh" id="SphereMesh_target_glow"]
+radius = 0.11
+height = 0.22
+
+[sub_resource type="StandardMaterial3D" id="Mat_marker_orb"]
+transparency = 1
+albedo_color = Color(0.52, 0.86, 1, 0.62)
+emission_enabled = true
+emission = Color(0.48, 0.82, 1, 1)
+emission_energy_multiplier = 2.0
+shading_mode = 0
+depth_draw_mode = 1
+cull_mode = 2
+
+[sub_resource type="StandardMaterial3D" id="Mat_marker_orb_door"]
+transparency = 1
+albedo_color = Color(1, 0.84, 0.36, 0.62)
+emission_enabled = true
+emission = Color(1, 0.82, 0.34, 1)
+emission_energy_multiplier = 2.0
+shading_mode = 0
+depth_draw_mode = 1
+cull_mode = 2
+
+[sub_resource type="SphereMesh" id="SphereMesh_marker_orb"]
+radius = 0.09
+height = 0.18
+
+[node name="LivingRoom3D" type="Node3D"]
+script = ExtResource("1_3dnav")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_1")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2, 0.85)
+current = true
+fov = 56.0
+
+[node name="MoonLight" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.819152, -0.573577, 0, 0.379594, 0.542358, -0.749442, 0.429185, 0.613488, 0.662069, 0, 0, 0)
+light_color = Color(0.53, 0.62, 0.72, 1)
+light_energy = 0.45
+shadow_enabled = true
+
+[node name="FireLight" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95, -2.25)
+light_color = Color(1, 0.47, 0.22, 1)
+light_energy = 2.2
+omni_range = 6.8
+shadow_enabled = true
+
+[node name="LampLight" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.642788, 0.766044, 0, -0.766044, 0.642788, 2.9, 2.45, -0.8)
+light_color = Color(1, 0.9, 0.72, 1)
+light_energy = 1.4
+spot_range = 8.0
+spot_angle = 34.0
+shadow_enabled = true
+
+[node name="BookshelfLightLeft" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.052336, 0.99863, 0, -0.99863, 0.052336, -3.25, 3.02, 4.05)
+light_color = Color(1, 0.92, 0.76, 1)
+light_energy = 2.1
+spot_range = 7.6
+spot_angle = 50.0
+shadow_enabled = false
+
+[node name="BookshelfLightRight" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.052336, 0.99863, 0, -0.99863, 0.052336, 3.25, 3.02, 4.05)
+light_color = Color(1, 0.92, 0.76, 1)
+light_energy = 2.1
+spot_range = 7.6
+spot_angle = 50.0
+shadow_enabled = false
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_floor")
+surface_material_override/0 = SubResource("Mat_floor")
+
+[node name="BackWall" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, -5.0)
+mesh = SubResource("BoxMesh_wall_back")
+surface_material_override/0 = SubResource("Mat_wall")
+
+[node name="LeftWall" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.0, 1.7, 0)
+mesh = SubResource("BoxMesh_wall_side")
+surface_material_override/0 = SubResource("Mat_wall")
+
+[node name="RightWall" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.0, 1.7, 0)
+mesh = SubResource("BoxMesh_wall_side")
+surface_material_override/0 = SubResource("Mat_wall")
+
+[node name="OppositeWallLeft" type="MeshInstance3D" parent="."]
+transform = Transform3D(4.75, 0, 0, 0, 3.4, 0, 0, 0, 0.2, -4.62, 1.7, 4.95)
+mesh = SubResource("BoxMesh_generic")
+surface_material_override/0 = SubResource("Mat_wall")
+
+[node name="OppositeWallRight" type="MeshInstance3D" parent="."]
+transform = Transform3D(4.75, 0, 0, 0, 3.4, 0, 0, 0, 0.2, 4.62, 1.7, 4.95)
+mesh = SubResource("BoxMesh_generic")
+surface_material_override/0 = SubResource("Mat_wall")
+
+[node name="OppositeWallHeader" type="MeshInstance3D" parent="."]
+transform = Transform3D(4.5, 0, 0, 0, 0.95, 0, 0, 0, 0.2, 0, 2.95, 4.95)
+mesh = SubResource("BoxMesh_generic")
+surface_material_override/0 = SubResource("Mat_wall")
+
+[node name="OppositeDoorFrameLeft" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.22, 0, 0, 0, 2.6, 0, 0, 0, 0.28, -1.32, 1.3, 4.88)
+mesh = SubResource("BoxMesh_generic")
+surface_material_override/0 = SubResource("Mat_wood_dark")
+
+[node name="OppositeDoorFrameRight" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.22, 0, 0, 0, 2.6, 0, 0, 0, 0.28, 1.32, 1.3, 4.88)
+mesh = SubResource("BoxMesh_generic")
+surface_material_override/0 = SubResource("Mat_wood_dark")
+
+[node name="OppositeDoorLintel" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.54, 0, 0, 0, 0.2, 0, 0, 0, 0.28, 0, 2.5, 4.88)
+mesh = SubResource("BoxMesh_generic")
+surface_material_override/0 = SubResource("Mat_wood_dark")
+
+[node name="OppositeDoorOpening" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.36, 0, 0, 0, 2.45, 0, 0, 0, 0.16, 0, 1.22, 4.82)
+mesh = SubResource("BoxMesh_generic")
+surface_material_override/0 = SubResource("Mat_frame_dark")
+
+[node name="OppositeBookshelves" type="Node3D" parent="."]
+
+[node name="LeftBookcaseOuter" type="MeshInstance3D" parent="OppositeBookshelves"]
+transform = Transform3D(2.1, 0, 0, 0, 2.7, 0, 0, 0, 0.56, -3.2, 1.35, 4.72)
+mesh = SubResource("BoxMesh_generic")
+surface_material_override/0 = SubResource("Mat_shelf_wood")
+
+[node name="LeftBookcaseInner" type="MeshInstance3D" parent="OppositeBookshelves"]
+transform = Transform3D(1.74, 0, 0, 0, 2.32, 0, 0, 0, 0.5, -3.2, 1.34, 4.64)
+mesh = SubResource("BoxMesh_generic")
+surface_material_override/0 = SubResource("Mat_wall")
+
+[node name="LeftShelfBooksTop" type="MeshInstance3D" parent="OppositeBookshelves"]
+transform = Transform3D(1.55, 0, 0, 0, 0.48, 0, 0, 0, 0.32, -3.2, 2.2, 4.56)
+mesh = SubResource("BoxMesh_generic")
+surface_material_override/0 = SubResource("Mat_book_spine")
+
+[node name="LeftShelfBooksMid" type="MeshInstance3D" parent="OppositeBookshelves"]
+transform = Transform3D(1.55, 0, 0, 0, 0.48, 0, 0, 0, 0.32, -3.2, 1.45, 4.56)
+mesh = SubResource("BoxMesh_generic")
+surface_material_override/0 = SubResource("Mat_book_spine")
+
+[node name="LeftShelfBooksLow" type="MeshInstance3D" parent="OppositeBookshelves"]
+transform = Transform3D(1.55, 0, 0, 0, 0.48, 0, 0, 0, 0.32, -3.2, 0.72, 4.56)
+mesh = SubResource("BoxMesh_generic")
+surface_material_override/0 = SubResource("Mat_book_spine")
+
+[node name="RightBookcaseOuter" type="MeshInstance3D" parent="OppositeBookshelves"]
+transform = Transform3D(2.1, 0, 0, 0, 2.7, 0, 0, 0, 0.56, 3.2, 1.35, 4.72)
+mesh = SubResource("BoxMesh_generic")
+surface_material_override/0 = SubResource("Mat_shelf_wood")
+
+[node name="RightBookcaseInner" type="MeshInstance3D" parent="OppositeBookshelves"]
+transform = Transform3D(1.74, 0, 0, 0, 2.32, 0, 0, 0, 0.5, 3.2, 1.34, 4.64)
+mesh = SubResource("BoxMesh_generic")
+surface_material_override/0 = SubResource("Mat_wall")
+
+[node name="RightShelfBooksTop" type="MeshInstance3D" parent="OppositeBookshelves"]
+transform = Transform3D(1.55, 0, 0, 0, 0.48, 0, 0, 0, 0.32, 3.2, 2.2, 4.56)
+mesh = SubResource("BoxMesh_generic")
+surface_material_override/0 = SubResource("Mat_book_spine")
+
+[node name="RightShelfBooksMid" type="MeshInstance3D" parent="OppositeBookshelves"]
+transform = Transform3D(1.55, 0, 0, 0, 0.48, 0, 0, 0, 0.32, 3.2, 1.45, 4.56)
+mesh = SubResource("BoxMesh_generic")
+surface_material_override/0 = SubResource("Mat_book_spine")
+
+[node name="RightShelfBooksLow" type="MeshInstance3D" parent="OppositeBookshelves"]
+transform = Transform3D(1.55, 0, 0, 0, 0.48, 0, 0, 0, 0.32, 3.2, 0.72, 4.56)
+mesh = SubResource("BoxMesh_generic")
+surface_material_override/0 = SubResource("Mat_book_spine")
+
+[node name="Rug" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0.01, -0.6)
+mesh = SubResource("PlaneMesh_rug")
+surface_material_override/0 = SubResource("Mat_rug")
+
+[node name="FireplaceBody" type="MeshInstance3D" parent="."]
+transform = Transform3D(2.3, 0, 0, 0, 1.9, 0, 0, 0, 0.7, 0, 0.95, -4.55)
+mesh = SubResource("BoxMesh_generic")
+surface_material_override/0 = SubResource("Mat_wood_dark")
+
+[node name="FireplaceMantle" type="MeshInstance3D" parent="."]
+transform = Transform3D(2.55, 0, 0, 0, 0.14, 0, 0, 0, 0.9, 0, 2.05, -4.55)
+mesh = SubResource("BoxMesh_generic")
+surface_material_override/0 = SubResource("Mat_wood_mid")
+
+[node name="Firebox" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.05, 0, 0, 0, 0.84, 0, 0, 0, 0.35, 0, 0.78, -4.22)
+mesh = SubResource("BoxMesh_generic")
+surface_material_override/0 = SubResource("Mat_fire_inner")
+
+[node name="SofaBase" type="MeshInstance3D" parent="."]
+transform = Transform3D(2.8, 0, 0, 0, 0.5, 0, 0, 0, 1.2, 3.0, 0.32, -1.8)
+mesh = SubResource("BoxMesh_generic")
+surface_material_override/0 = SubResource("Mat_sofa")
+
+[node name="SofaBack" type="MeshInstance3D" parent="."]
+transform = Transform3D(2.8, 0, 0, 0, 1.0, 0, 0, 0, 0.38, 3.0, 1.05, -2.22)
+mesh = SubResource("BoxMesh_generic")
+surface_material_override/0 = SubResource("Mat_sofa")
+
+[node name="SofaArmLeft" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.32, 0, 0, 0, 0.64, 0, 0, 0, 1.2, 1.58, 0.58, -1.8)
+mesh = SubResource("BoxMesh_generic")
+surface_material_override/0 = SubResource("Mat_sofa")
+
+[node name="SofaArmRight" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.32, 0, 0, 0, 0.64, 0, 0, 0, 1.2, 4.42, 0.58, -1.8)
+mesh = SubResource("BoxMesh_generic")
+surface_material_override/0 = SubResource("Mat_sofa")
+
+[node name="CoffeeTableTop" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.7, 0, 0, 0, 0.1, 0, 0, 0, 1.05, 0.6, 0.42, -1.15)
+mesh = SubResource("BoxMesh_generic")
+surface_material_override/0 = SubResource("Mat_table_top")
+
+[node name="CoffeeTableLegA" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.08, 0, 0, 0, 0.4, 0, 0, 0, 0.08, -0.12, 0.2, -0.74)
+mesh = SubResource("BoxMesh_generic")
+surface_material_override/0 = SubResource("Mat_wood_dark")
+
+[node name="CoffeeTableLegB" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.08, 0, 0, 0, 0.4, 0, 0, 0, 0.08, 1.32, 0.2, -0.74)
+mesh = SubResource("BoxMesh_generic")
+surface_material_override/0 = SubResource("Mat_wood_dark")
+
+[node name="CoffeeTableLegC" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.08, 0, 0, 0, 0.4, 0, 0, 0, 0.08, -0.12, 0.2, -1.56)
+mesh = SubResource("BoxMesh_generic")
+surface_material_override/0 = SubResource("Mat_wood_dark")
+
+[node name="CoffeeTableLegD" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.08, 0, 0, 0, 0.4, 0, 0, 0, 0.08, 1.32, 0.2, -1.56)
+mesh = SubResource("BoxMesh_generic")
+surface_material_override/0 = SubResource("Mat_wood_dark")
+
+[node name="WindowFrame" type="MeshInstance3D" parent="."]
+transform = Transform3D(2.8, 0, 0, 0, 1.8, 0, 0, 0, 0.12, -3.5, 1.9, -4.88)
+mesh = SubResource("BoxMesh_generic")
+surface_material_override/0 = SubResource("Mat_wood_dark")
+
+[node name="WindowPane" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 1.9, -4.78)
+mesh = SubResource("QuadMesh_window")
+surface_material_override/0 = SubResource("Mat_window_glass")
+
+[node name="MoonBeam" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.656059, -0.75471, 0, 0.75471, 0.656059, -2.35, 0.9, -2.7)
+mesh = SubResource("QuadMesh_moonbeam")
+surface_material_override/0 = SubResource("Mat_moonbeam")
+
+[node name="MoonFloorPatch" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.93358, 0, -0.358368, 0, 1, 0, 0.358368, 0, 0.93358, -1.25, 0.015, -1.45)
+mesh = SubResource("PlaneMesh_moonpatch")
+surface_material_override/0 = SubResource("Mat_moonpatch")
+
+[node name="MoonFloorCorePatch" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.93358, 0, -0.358368, 0, 1, 0, 0.358368, 0, 0.93358, -1.32, 0.017, -1.55)
+mesh = SubResource("PlaneMesh_mooncore")
+surface_material_override/0 = SubResource("Mat_mooncore")
+
+[node name="WallDecor" type="Node3D" parent="."]
+
+[node name="BackCeilingBeam" type="MeshInstance3D" parent="WallDecor"]
+transform = Transform3D(14.0, 0, 0, 0, 0.22, 0, 0, 0, 0.34, 0, 3.15, -4.82)
+mesh = SubResource("BoxMesh_generic")
+surface_material_override/0 = SubResource("Mat_trim_beam")
+
+[node name="LeftCeilingBeam" type="MeshInstance3D" parent="WallDecor"]
+transform = Transform3D(0.34, 0, 0, 0, 0.22, 0, 0, 0, 10.0, -6.82, 3.15, 0)
+mesh = SubResource("BoxMesh_generic")
+surface_material_override/0 = SubResource("Mat_trim_beam")
+
+[node name="RightCeilingBeam" type="MeshInstance3D" parent="WallDecor"]
+transform = Transform3D(0.34, 0, 0, 0, 0.22, 0, 0, 0, 10.0, 6.82, 3.15, 0)
+mesh = SubResource("BoxMesh_generic")
+surface_material_override/0 = SubResource("Mat_trim_beam")
+
+[node name="LeftWallShelfTop" type="MeshInstance3D" parent="WallDecor"]
+transform = Transform3D(0.18, 0, 0, 0, 0.12, 0, 0, 0, 2.0, -6.84, 2.08, -1.35)
+mesh = SubResource("BoxMesh_generic")
+surface_material_override/0 = SubResource("Mat_shelf_wood")
+
+[node name="LeftWallShelfBottom" type="MeshInstance3D" parent="WallDecor"]
+transform = Transform3D(0.18, 0, 0, 0, 0.12, 0, 0, 0, 2.0, -6.84, 1.28, -1.35)
+mesh = SubResource("BoxMesh_generic")
+surface_material_override/0 = SubResource("Mat_shelf_wood")
+
+[node name="RightWallShelfTop" type="MeshInstance3D" parent="WallDecor"]
+transform = Transform3D(0.18, 0, 0, 0, 0.12, 0, 0, 0, 2.1, 6.84, 2.0, -1.95)
+mesh = SubResource("BoxMesh_generic")
+surface_material_override/0 = SubResource("Mat_shelf_wood")
+
+[node name="RightWallShelfBottom" type="MeshInstance3D" parent="WallDecor"]
+transform = Transform3D(0.18, 0, 0, 0, 0.12, 0, 0, 0, 2.1, 6.84, 1.2, -1.95)
+mesh = SubResource("BoxMesh_generic")
+surface_material_override/0 = SubResource("Mat_shelf_wood")
+
+[node name="ShelfBooksLeft" type="MeshInstance3D" parent="WallDecor"]
+transform = Transform3D(0.1, 0, 0, 0, 0.54, 0, 0, 0, 0.8, -6.76, 1.74, -0.82)
+mesh = SubResource("BoxMesh_generic")
+surface_material_override/0 = SubResource("Mat_book_spine")
+
+[node name="ShelfBooksLeft2" type="MeshInstance3D" parent="WallDecor"]
+transform = Transform3D(0.1, 0, 0, 0, 0.46, 0, 0, 0, 0.74, -6.76, 1.0, -1.78)
+mesh = SubResource("BoxMesh_generic")
+surface_material_override/0 = SubResource("Mat_book_spine")
+
+[node name="ShelfBooksRight" type="MeshInstance3D" parent="WallDecor"]
+transform = Transform3D(0.1, 0, 0, 0, 0.62, 0, 0, 0, 0.86, 6.76, 1.66, -2.52)
+mesh = SubResource("BoxMesh_generic")
+surface_material_override/0 = SubResource("Mat_book_spine")
+
+[node name="ShelfBooksRight2" type="MeshInstance3D" parent="WallDecor"]
+transform = Transform3D(0.1, 0, 0, 0, 0.42, 0, 0, 0, 0.7, 6.76, 0.92, -1.28)
+mesh = SubResource("BoxMesh_generic")
+surface_material_override/0 = SubResource("Mat_book_spine")
+
+[node name="LeftWallFrameOuter" type="MeshInstance3D" parent="WallDecor"]
+transform = Transform3D(0.08, 0, 0, 0, 0.64, 0, 0, 0, 1.0, -6.86, 2.08, 2.05)
+mesh = SubResource("BoxMesh_generic")
+surface_material_override/0 = SubResource("Mat_frame_dark")
+
+[node name="LeftWallFrameInner" type="MeshInstance3D" parent="WallDecor"]
+transform = Transform3D(0.09, 0, 0, 0, 0.52, 0, 0, 0, 0.82, -6.84, 2.08, 2.05)
+mesh = SubResource("BoxMesh_generic")
+surface_material_override/0 = SubResource("Mat_canvas_warm")
+
+[node name="RightWallFrameOuter" type="MeshInstance3D" parent="WallDecor"]
+transform = Transform3D(0.08, 0, 0, 0, 0.56, 0, 0, 0, 0.88, 6.86, 2.0, 1.45)
+mesh = SubResource("BoxMesh_generic")
+surface_material_override/0 = SubResource("Mat_frame_dark")
+
+[node name="RightWallFrameInner" type="MeshInstance3D" parent="WallDecor"]
+transform = Transform3D(0.09, 0, 0, 0, 0.44, 0, 0, 0, 0.72, 6.84, 2.0, 1.45)
+mesh = SubResource("BoxMesh_generic")
+surface_material_override/0 = SubResource("Mat_canvas_warm")
+
+[node name="DogCompanion" type="Node3D" parent="."]
+transform = Transform3D(0.961262, 0, -0.275637, 0, 1, 0, 0.275637, 0, 0.961262, -2.08, 0.035, -2.1)
+
+[node name="GermanShepherdLying" parent="DogCompanion" instance=ExtResource("2_dogmesh")]
+transform = Transform3D(0.54, 0, 0, 0, 0.54, 0, 0, 0, 0.54, 0, 0.0, 0)
+
+[node name="Hotspots" type="Node3D" parent="."]
+
+[node name="ChampagneSpot" type="Marker3D" parent="Hotspots"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.95, 0.56, -1.05)
+
+[node name="CardsSpot" type="Marker3D" parent="Hotspots"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0.56, -1.22)
+
+[node name="PoolDoorSpot" type="Marker3D" parent="Hotspots"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.95, 0.1, -2.4)
+
+[node name="ChampagneProp" type="Node3D" parent="Hotspots"]
+transform = Transform3D(0.984808, 0, -0.173648, 0, 1, 0, 0.173648, 0, 0.984808, 0.95, 0.45, -1.05)
+
+[node name="FluteStem" type="MeshInstance3D" parent="Hotspots/ChampagneProp"]
+transform = Transform3D(1, 0, 0, 0, 0.95, 0, 0, 0, 1, 0, 0.12, 0)
+mesh = SubResource("CylinderMesh_flute_stem")
+surface_material_override/0 = SubResource("Mat_glass_interact")
+
+[node name="FluteBowl" type="MeshInstance3D" parent="Hotspots/ChampagneProp"]
+transform = Transform3D(1, 0, 0, 0, 1.05, 0, 0, 0, 1, 0, 0.315, 0)
+mesh = SubResource("CylinderMesh_flute_bowl")
+surface_material_override/0 = SubResource("Mat_glass_interact")
+
+[node name="CardsProp" type="Node3D" parent="Hotspots"]
+transform = Transform3D(0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.965926, 0.25, 0.46, -1.22)
+
+[node name="CardA" type="MeshInstance3D" parent="Hotspots/CardsProp"]
+transform = Transform3D(0.99863, 0.052336, 0, -0.052336, 0.99863, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("BoxMesh_card")
+surface_material_override/0 = SubResource("Mat_card_paper")
+
+[node name="CardB" type="MeshInstance3D" parent="Hotspots/CardsProp"]
+transform = Transform3D(0.994522, -0.104528, 0, 0.104528, 0.994522, 0, 0, 0, 1, -0.02, 0.012, -0.008)
+mesh = SubResource("BoxMesh_card")
+surface_material_override/0 = SubResource("Mat_card_paper")
+
+[node name="CardC" type="MeshInstance3D" parent="Hotspots/CardsProp"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.018, 0.024, 0.01)
+mesh = SubResource("BoxMesh_card")
+surface_material_override/0 = SubResource("Mat_card_stamp")
+
+[node name="PoolDoorProp" type="Node3D" parent="Hotspots"]
+transform = Transform3D(0.766044, 0, -0.642788, 0, 1, 0, 0.642788, 0, 0.766044, 5.95, 0.56, -2.4)
+
+[node name="DoorKnob" type="MeshInstance3D" parent="Hotspots/PoolDoorProp"]
+mesh = SubResource("CylinderMesh_knob")
+surface_material_override/0 = SubResource("Mat_brass_interact")
+
+[node name="DoorPlaque" type="MeshInstance3D" parent="Hotspots/PoolDoorProp"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.12, -0.07)
+mesh = SubResource("BoxMesh_plaque")
+surface_material_override/0 = SubResource("Mat_brass_interact")
+
+[node name="ChampagneTargetGlow" type="MeshInstance3D" parent="Hotspots"]
+visible = false
+transform = Transform3D(1.28, 0, 0, 0, 1.28, 0, 0, 0, 1.28, 0.95, 0.62, -1.05)
+mesh = SubResource("SphereMesh_target_glow")
+surface_material_override/0 = SubResource("Mat_target_glow")
+
+[node name="CardsTargetGlow" type="MeshInstance3D" parent="Hotspots"]
+visible = false
+transform = Transform3D(1.34, 0, 0, 0, 0.7, 0, 0, 0, 1.12, 0.25, 0.5, -1.22)
+mesh = SubResource("SphereMesh_target_glow")
+surface_material_override/0 = SubResource("Mat_target_glow")
+
+[node name="PoolDoorTargetGlow" type="MeshInstance3D" parent="Hotspots"]
+visible = false
+transform = Transform3D(1.48, 0, 0, 0, 1.48, 0, 0, 0, 1.48, 5.95, 0.56, -2.4)
+mesh = SubResource("SphereMesh_target_glow")
+surface_material_override/0 = SubResource("Mat_target_glow")
+
+[node name="DogTargetGlow" type="MeshInstance3D" parent="Hotspots"]
+visible = false
+transform = Transform3D(1.82, 0, 0, 0, 0.96, 0, 0, 0, 1.18, -2.08, 0.2, -2.1)
+mesh = SubResource("SphereMesh_target_glow")
+surface_material_override/0 = SubResource("Mat_target_glow")
+
+[node name="ChampagneFloatingMarker" type="MeshInstance3D" parent="Hotspots"]
+transform = Transform3D(1.12, 0, 0, 0, 1.12, 0, 0, 0, 1.12, 0.95, 0.98, -1.05)
+mesh = SubResource("SphereMesh_marker_orb")
+surface_material_override/0 = SubResource("Mat_marker_orb")
+
+[node name="CardsFloatingMarker" type="MeshInstance3D" parent="Hotspots"]
+transform = Transform3D(1.12, 0, 0, 0, 1.12, 0, 0, 0, 1.12, 0.25, 0.92, -1.22)
+mesh = SubResource("SphereMesh_marker_orb")
+surface_material_override/0 = SubResource("Mat_marker_orb")
+
+[node name="PoolDoorFloatingMarker" type="MeshInstance3D" parent="Hotspots"]
+transform = Transform3D(1.24, 0, 0, 0, 1.24, 0, 0, 0, 1.24, 5.95, 1.16, -2.4)
+mesh = SubResource("SphereMesh_marker_orb")
+surface_material_override/0 = SubResource("Mat_marker_orb_door")
+
+[node name="DogFloatingMarker" type="MeshInstance3D" parent="Hotspots"]
+transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, -2.08, 0.98, -2.1)
+mesh = SubResource("SphereMesh_marker_orb")
+surface_material_override/0 = SubResource("Mat_marker_orb")
+
+[node name="ChampagneInteract" type="Area3D" parent="Hotspots"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.95, 0.56, -1.05)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hotspots/ChampagneInteract"]
+shape = SubResource("SphereShape_hotspot")
+
+[node name="CardsInteract" type="Area3D" parent="Hotspots"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0.56, -1.22)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hotspots/CardsInteract"]
+shape = SubResource("SphereShape_hotspot")
+
+[node name="PoolDoorInteract" type="Area3D" parent="Hotspots"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.95, 0.45, -2.4)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hotspots/PoolDoorInteract"]
+shape = SubResource("SphereShape_hotspot")
+
+[node name="DogInteract" type="Area3D" parent="Hotspots"]
+transform = Transform3D(1, 0, 0, 0, 0.62, 0, 0, 0, 1, -2.08, 0.2, -2.1)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hotspots/DogInteract"]
+shape = SubResource("SphereShape_hotspot_dog")
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="ControlsPanel" type="PanelContainer" parent="HUD"]
+offset_left = 14.0
+offset_top = 14.0
+offset_right = 446.0
+offset_bottom = 130.0
+
+[node name="ControlsLabel" type="Label" parent="HUD/ControlsPanel"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+autowrap_mode = 2
+text = "Click to capture mouse | WASD or Arrow Keys: Move | Shift: Sprint | Esc: Release cursor"
+
+[node name="NotebookPanel" type="PanelContainer" parent="HUD"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -350.0
+offset_top = 14.0
+offset_right = -14.0
+offset_bottom = 170.0
+
+[node name="NotebookLabel" type="Label" parent="HUD/NotebookPanel"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+autowrap_mode = 2
+text = "Notebook loading..."
+
+[node name="FocusPanel" type="PanelContainer" parent="HUD"]
+anchors_preset = 10
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -310.0
+offset_top = -112.0
+offset_right = 310.0
+offset_bottom = -12.0
+
+[node name="FocusLabel" type="Label" parent="HUD/FocusPanel"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 17
+autowrap_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+text = "Look at an object and click or press E to interact."
+
+[node name="ClueLogPanel" type="PanelContainer" parent="HUD"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -350.0
+offset_top = 178.0
+offset_right = -14.0
+offset_bottom = 334.0
+
+[node name="ClueLogLabel" type="Label" parent="HUD/ClueLogPanel"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+autowrap_mode = 2
+text = "Latest clue log loading..."
+
+[node name="Crosshair" type="Label" parent="HUD"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+theme_override_font_sizes/font_size = 22
+text = "+"
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -1,0 +1,108 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_kbh4q"]
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_kbh4q")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.09, 0.07, 0.08, 1)
+
+[node name="Shell" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="Columns" type="HBoxContainer" parent="Shell"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="LeftPane" type="VBoxContainer" parent="Shell/Columns"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+
+[node name="Title" type="Label" parent="Shell/Columns/LeftPane"]
+layout_mode = 2
+text = "Woodside Estate (Godot Skeleton)"
+
+[node name="RoomTitle" type="Label" parent="Shell/Columns/LeftPane"]
+layout_mode = 2
+text = "Room: Living Room"
+
+[node name="RoomViewport" type="PanelContainer" parent="Shell/Columns/LeftPane"]
+custom_minimum_size = Vector2(0, 360)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="RoomRoot" type="Node" parent="Shell/Columns/LeftPane/RoomViewport"]
+
+[node name="LogTitle" type="Label" parent="Shell/Columns/LeftPane"]
+layout_mode = 2
+text = "Log"
+
+[node name="LogText" type="Label" parent="Shell/Columns/LeftPane"]
+layout_mode = 2
+text = "Tap hotspots to inspect clues."
+
+[node name="CenterPane" type="VBoxContainer" parent="Shell/Columns"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+
+[node name="HotspotTitle" type="Label" parent="Shell/Columns/CenterPane"]
+layout_mode = 2
+text = "Interactables"
+
+[node name="HotspotList" type="VBoxContainer" parent="Shell/Columns/CenterPane"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 8
+
+[node name="RightPane" type="VBoxContainer" parent="Shell/Columns"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+
+[node name="NotebookTitle" type="Label" parent="Shell/Columns/RightPane"]
+layout_mode = 2
+text = "Notebook"
+
+[node name="NotebookCount" type="Label" parent="Shell/Columns/RightPane"]
+layout_mode = 2
+text = "Notebook: 0/0 clues discovered"
+
+[node name="KeywordTitle" type="Label" parent="Shell/Columns/RightPane"]
+layout_mode = 2
+text = "Keywords"
+
+[node name="KeywordList" type="ItemList" parent="Shell/Columns/RightPane"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="DiscoveredTitle" type="Label" parent="Shell/Columns/RightPane"]
+layout_mode = 2
+text = "Discovered Clues"
+
+[node name="DiscoveredList" type="ItemList" parent="Shell/Columns/RightPane"]
+layout_mode = 2
+size_flags_vertical = 3

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/rooms/pool_room.gd" id="1_3xwv1"]
+
+[node name="PoolRoom" type="Node"]
+script = ExtResource("1_3xwv1")

@@ -1,0 +1,507 @@
+[gd_scene format=3 uid="uid://cnll0y3p275sq"]
+
+[ext_resource type="Script" uid="uid://dmeagbeuhnxpp" path="res://scripts/rooms/living_room.gd" id="1_04bq5"]
+
+[node name="LivingRoom" type="Control" unique_id=80511702]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_04bq5")
+
+[node name="RoomArt" type="Control" parent="." unique_id=708994595]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SkyGlow" type="ColorRect" parent="RoomArt" unique_id=1374928050]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.12, 0.09, 0.08, 1)
+
+[node name="Wall" type="ColorRect" parent="RoomArt" unique_id=2120717201]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 238.0
+grow_horizontal = 2
+color = Color(0.24, 0.17, 0.13, 1)
+
+[node name="WallWarmTint" type="ColorRect" parent="RoomArt" unique_id=1002371515]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 238.0
+grow_horizontal = 2
+color = Color(0.42, 0.24, 0.14, 0.1)
+
+[node name="WallPanelLineA" type="ColorRect" parent="RoomArt" unique_id=1450887660]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.13
+anchor_right = 0.132
+anchor_bottom = 0.62
+color = Color(0.16, 0.1, 0.07, 0.45)
+
+[node name="WallPanelLineB" type="ColorRect" parent="RoomArt" unique_id=11132838]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.34
+anchor_right = 0.342
+anchor_bottom = 0.62
+color = Color(0.16, 0.1, 0.07, 0.45)
+
+[node name="WallPanelLineC" type="ColorRect" parent="RoomArt" unique_id=1192105591]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.66
+anchor_right = 0.662
+anchor_bottom = 0.62
+color = Color(0.16, 0.1, 0.07, 0.45)
+
+[node name="WallPanelLineD" type="ColorRect" parent="RoomArt" unique_id=1614918079]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.84
+anchor_right = 0.842
+anchor_bottom = 0.62
+color = Color(0.16, 0.1, 0.07, 0.45)
+
+[node name="CeilingShadow" type="ColorRect" parent="RoomArt" unique_id=609723895]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 126.0
+grow_horizontal = 2
+color = Color(0.05, 0.03, 0.02, 0.46)
+
+[node name="Wainscot" type="ColorRect" parent="RoomArt" unique_id=1853219267]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.62
+anchor_right = 1.0
+anchor_bottom = 0.78
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.17, 0.12, 0.09, 1)
+
+[node name="Floor" type="ColorRect" parent="RoomArt" unique_id=457212892]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.78
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.11, 0.07, 0.05, 1)
+
+[node name="FloorPlankLineA" type="ColorRect" parent="RoomArt" unique_id=389416013]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.82
+anchor_right = 1.0
+anchor_bottom = 0.824
+color = Color(0.06, 0.04, 0.03, 0.46)
+
+[node name="FloorPlankLineB" type="ColorRect" parent="RoomArt" unique_id=180496994]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.865
+anchor_right = 1.0
+anchor_bottom = 0.869
+color = Color(0.06, 0.04, 0.03, 0.46)
+
+[node name="FloorPlankLineC" type="ColorRect" parent="RoomArt" unique_id=1360687941]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.91
+anchor_right = 1.0
+anchor_bottom = 0.914
+color = Color(0.06, 0.04, 0.03, 0.46)
+
+[node name="FloorPlankLineD" type="ColorRect" parent="RoomArt" unique_id=727770832]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.955
+anchor_right = 1.0
+anchor_bottom = 0.959
+color = Color(0.06, 0.04, 0.03, 0.46)
+
+[node name="Window" type="Panel" parent="RoomArt" unique_id=557671095]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.08
+anchor_top = 0.15
+anchor_right = 0.28
+anchor_bottom = 0.47
+
+[node name="WindowGlow" type="ColorRect" parent="RoomArt" unique_id=969786835]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.08
+anchor_top = 0.15
+anchor_right = 0.28
+anchor_bottom = 0.47
+color = Color(0.38, 0.48, 0.58, 0.12)
+
+[node name="CurtainLeft" type="ColorRect" parent="RoomArt" unique_id=553425784]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.055
+anchor_top = 0.12
+anchor_right = 0.095
+anchor_bottom = 0.53
+color = Color(0.23, 0.11, 0.08, 0.93)
+
+[node name="CurtainRight" type="ColorRect" parent="RoomArt" unique_id=879996450]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.27
+anchor_top = 0.12
+anchor_right = 0.31
+anchor_bottom = 0.53
+color = Color(0.23, 0.11, 0.08, 0.93)
+
+[node name="MoonBeam" type="ColorRect" parent="RoomArt" unique_id=846009292]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.2
+anchor_top = 0.43
+anchor_right = 0.46
+anchor_bottom = 0.95
+rotation = 0.16
+color = Color(0.49, 0.58, 0.68, 0.07)
+
+[node name="FireplaceBody" type="Panel" parent="RoomArt" unique_id=383235314]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.35
+anchor_top = 0.29
+anchor_right = 0.54
+anchor_bottom = 0.78
+
+[node name="FireplaceGlow" type="ColorRect" parent="RoomArt" unique_id=841850845]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.383
+anchor_top = 0.47
+anchor_right = 0.507
+anchor_bottom = 0.695
+color = Color(0.74, 0.34, 0.11, 0.72)
+
+[node name="FireCore" type="ColorRect" parent="RoomArt/FireplaceGlow" unique_id=1293921565]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.25
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0.74, 0.28, 0.92)
+
+[node name="FireEmber" type="ColorRect" parent="RoomArt/FireplaceGlow" unique_id=18650068]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.55
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0.43, 0.12, 0.7)
+
+[node name="FireLightSpill" type="ColorRect" parent="RoomArt" unique_id=1099454758]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.46
+anchor_top = 0.56
+anchor_right = 0.72
+anchor_bottom = 0.89
+color = Color(1, 0.44, 0.18, 0.09)
+
+[node name="Sofa" type="Panel" parent="RoomArt" unique_id=1766325807]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.56
+anchor_top = 0.58
+anchor_right = 0.9
+anchor_bottom = 0.92
+
+[node name="SofaCushionSeamA" type="ColorRect" parent="RoomArt" unique_id=1172386795]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.61
+anchor_top = 0.66
+anchor_right = 0.615
+anchor_bottom = 0.88
+color = Color(0.1, 0.07, 0.05, 0.42)
+
+[node name="SofaCushionSeamB" type="ColorRect" parent="RoomArt" unique_id=1090898068]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.75
+anchor_top = 0.66
+anchor_right = 0.755
+anchor_bottom = 0.88
+color = Color(0.1, 0.07, 0.05, 0.42)
+
+[node name="SofaTopHighlight" type="ColorRect" parent="RoomArt" unique_id=477582396]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.56
+anchor_top = 0.58
+anchor_right = 0.9
+anchor_bottom = 0.64
+color = Color(0.58, 0.39, 0.26, 0.1)
+
+[node name="SofaShadow" type="ColorRect" parent="RoomArt" unique_id=1321144720]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.55
+anchor_top = 0.9
+anchor_right = 0.91
+anchor_bottom = 0.98
+color = Color(0.05, 0.03, 0.02, 0.36)
+
+[node name="Rug" type="ColorRect" parent="RoomArt" unique_id=1852818827]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.26
+anchor_top = 0.79
+anchor_right = 0.79
+anchor_bottom = 1.0
+color = Color(0.4, 0.21, 0.15, 0.88)
+
+[node name="RugBorder" type="ColorRect" parent="RoomArt" unique_id=132527377]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.26
+anchor_top = 0.79
+anchor_right = 0.79
+anchor_bottom = 0.81
+color = Color(0.65, 0.43, 0.3, 0.5)
+
+[node name="RugStripeA" type="ColorRect" parent="RoomArt" unique_id=575090697]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.28
+anchor_top = 0.83
+anchor_right = 0.78
+anchor_bottom = 0.86
+color = Color(0.63, 0.43, 0.3, 0.38)
+
+[node name="RugStripeB" type="ColorRect" parent="RoomArt" unique_id=654912351]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.28
+anchor_top = 0.9
+anchor_right = 0.78
+anchor_bottom = 0.93
+color = Color(0.63, 0.43, 0.3, 0.38)
+
+[node name="CoffeeTable" type="Panel" parent="RoomArt" unique_id=846197856]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.455
+anchor_top = 0.71
+anchor_right = 0.665
+anchor_bottom = 0.88
+
+[node name="CoffeeTableHighlight" type="ColorRect" parent="RoomArt" unique_id=552497110]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.46
+anchor_top = 0.72
+anchor_right = 0.66
+anchor_bottom = 0.75
+color = Color(0.72, 0.52, 0.31, 0.15)
+
+[node name="TableShadow" type="ColorRect" parent="RoomArt" unique_id=159819481]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.45
+anchor_top = 0.86
+anchor_right = 0.68
+anchor_bottom = 0.94
+color = Color(0.04, 0.03, 0.02, 0.42)
+
+[node name="BookshelfLeft" type="Panel" parent="RoomArt" unique_id=1422032707]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.293
+anchor_top = 0.16
+anchor_right = 0.347
+anchor_bottom = 0.68
+
+[node name="BookshelfLeftShelfA" type="ColorRect" parent="RoomArt" unique_id=155448438]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.293
+anchor_top = 0.25
+anchor_right = 0.347
+anchor_bottom = 0.257
+color = Color(0.08, 0.05, 0.03, 0.65)
+
+[node name="BookshelfLeftShelfB" type="ColorRect" parent="RoomArt" unique_id=2084187285]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.293
+anchor_top = 0.36
+anchor_right = 0.347
+anchor_bottom = 0.367
+color = Color(0.08, 0.05, 0.03, 0.65)
+
+[node name="BookshelfLeftShelfC" type="ColorRect" parent="RoomArt" unique_id=1603697080]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.293
+anchor_top = 0.47
+anchor_right = 0.347
+anchor_bottom = 0.477
+color = Color(0.08, 0.05, 0.03, 0.65)
+
+[node name="BookshelfLeftShelfD" type="ColorRect" parent="RoomArt" unique_id=226160197]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.293
+anchor_top = 0.58
+anchor_right = 0.347
+anchor_bottom = 0.587
+color = Color(0.08, 0.05, 0.03, 0.65)
+
+[node name="BookshelfRight" type="Panel" parent="RoomArt" unique_id=904475243]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.551
+anchor_top = 0.16
+anchor_right = 0.607
+anchor_bottom = 0.68
+
+[node name="BookshelfRightShelfA" type="ColorRect" parent="RoomArt" unique_id=1114919825]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.551
+anchor_top = 0.25
+anchor_right = 0.607
+anchor_bottom = 0.257
+color = Color(0.08, 0.05, 0.03, 0.65)
+
+[node name="BookshelfRightShelfB" type="ColorRect" parent="RoomArt" unique_id=141110123]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.551
+anchor_top = 0.36
+anchor_right = 0.607
+anchor_bottom = 0.367
+color = Color(0.08, 0.05, 0.03, 0.65)
+
+[node name="BookshelfRightShelfC" type="ColorRect" parent="RoomArt" unique_id=2025288030]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.551
+anchor_top = 0.47
+anchor_right = 0.607
+anchor_bottom = 0.477
+color = Color(0.08, 0.05, 0.03, 0.65)
+
+[node name="BookshelfRightShelfD" type="ColorRect" parent="RoomArt" unique_id=2129202205]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.551
+anchor_top = 0.58
+anchor_right = 0.607
+anchor_bottom = 0.587
+color = Color(0.08, 0.05, 0.03, 0.65)
+
+[node name="Lamp" type="ColorRect" parent="RoomArt" unique_id=375289244]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.688
+anchor_top = 0.26
+anchor_right = 0.727
+anchor_bottom = 0.7
+color = Color(0.72, 0.56, 0.26, 0.72)
+
+[node name="VignetteTop" type="ColorRect" parent="RoomArt" unique_id=840140218]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 84.0
+grow_horizontal = 2
+color = Color(0.06, 0.04, 0.03, 0.5)
+
+[node name="VignetteBottom" type="ColorRect" parent="RoomArt" unique_id=1434909254]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.9
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.05, 0.03, 0.02, 0.56)
+
+[node name="DustOverlay" type="ColorRect" parent="RoomArt" unique_id=1182649320]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -237.0
+offset_top = -302.0
+offset_right = -237.0
+offset_bottom = -302.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.86, 0.76, 0.59, 0.02)
+
+[node name="PoolDoorButton" type="Button" parent="RoomArt" unique_id=1555388612]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.9
+anchor_top = 0.34
+anchor_right = 1.0
+anchor_bottom = 0.7
+offset_left = -6.0
+offset_right = -6.0
+text = "↗ Pool door"
+
+[node name="ChampagneButton" type="Button" parent="RoomArt" unique_id=1657065291]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.52
+anchor_top = 0.63
+anchor_right = 0.74
+anchor_bottom = 0.72
+text = "◈ Champagne flute"
+
+[node name="CardsButton" type="Button" parent="RoomArt" unique_id=1233483800]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.27
+anchor_top = 0.36
+anchor_right = 0.49
+anchor_bottom = 0.44
+text = "◈ Business cards"
+
+[node name="HintLabel" type="Label" parent="RoomArt" unique_id=1506010046]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.94
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Hover an item, then click to interact."
+horizontal_alignment = 1
+vertical_alignment = 1
