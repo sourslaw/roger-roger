@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Uncle Roger</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main id="app">
+    <header class="hud-header">
+      <div class="hud-title">
+        <h1 id="estate-title">Woodside Estate</h1>
+        <p id="room-tag">Living Room // Seasoned Hearth</p>
+      </div>
+      <span id="notebook-pill">Notebook: 0/6</span>
+    </header>
+
+    <section class="scene-shell">
+      <div id="scene-stage" class="scene-stage room-living">
+        <div class="scene-wall left"></div>
+        <div class="scene-wall center"></div>
+        <div class="scene-wall right"></div>
+        <div class="scene-floor"></div>
+
+        <div class="prop armchair"></div>
+        <div class="prop fireplace">
+          <div class="fireplace-core"></div>
+          <div class="fire-glow"></div>
+        </div>
+        <div class="prop side-console"></div>
+
+        <div class="pool-column"></div>
+        <div class="pool-surface"></div>
+        <div class="pool-wave wave-a"></div>
+        <div class="pool-wave wave-b"></div>
+        <div class="pool-ring"></div>
+        <div class="ambient-dot pool-mid-dot"></div>
+
+        <div class="study-shelf">
+          <span class="book b1"></span>
+          <span class="book b2"></span>
+          <span class="book b3"></span>
+        </div>
+        <div class="study-table"></div>
+        <div class="study-safe">
+          <div class="safe-ring"></div>
+        </div>
+        <div class="ambient-dot study-shelf-dot"></div>
+
+        <div id="hotspots-container" class="hotspots-layer"></div>
+      </div>
+    </section>
+
+    <nav class="room-nav">
+      <button class="nav-btn active" id="nav-living" onclick="switchRoom('living')">Living Room</button>
+      <button class="nav-btn" id="nav-pool" onclick="switchRoom('pool')">Poolside Patio</button>
+      <button class="nav-btn" id="nav-study" onclick="switchRoom('study')">The Study</button>
+    </nav>
+
+    <section class="notebook-panel">
+      <div class="notebook-header">
+        <span>ESTATE RESEARCH NOTEBOOK</span>
+        <span id="keyword-count">0 / 6 Discoveries</span>
+      </div>
+      <p id="scene-description" class="scene-copy">
+        Explore room hotspots to collect Uncle Roger’s estate secrets and cross-reference keywords.
+      </p>
+      <div id="keywords-list" class="keywords-list">
+        <span class="empty-hint">No discoveries yet. Tap the blue markers to inspect each room.</span>
+      </div>
+      <section id="log-output" class="log-panel">
+        <p class="system-msg">System initialized. Entering the estate...</p>
+      </section>
+    </section>
+  </main>
+
+  <script src="js/bridge.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
