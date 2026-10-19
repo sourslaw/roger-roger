@@ -79,6 +79,22 @@ If needed, you can also run these tasks separately:
 - `Godot: Export Web build`
 - `Godot: Serve Web build`
 
+## Deploy to GitHub Pages (`/docs` source)
+
+This repo is configured to deploy the exported web build from the root [docs/](/Users/lawans/Documents/00_Misc_Personal/100_roger-roger/docs) folder.
+
+1. Re-export web build from Godot into [build/web/](/Users/lawans/Documents/00_Misc_Personal/100_roger-roger/godot/build/web).
+2. Sync that export into [docs/](/Users/lawans/Documents/00_Misc_Personal/100_roger-roger/docs):
+   ```bash
+   rsync -a --delete godot/build/web/ docs/
+   touch docs/.nojekyll
+   ```
+3. Commit and push.
+4. In GitHub: **Settings → Pages**:
+   - **Source**: `Deploy from a branch`
+   - **Branch**: `main`
+   - **Folder**: `/docs`
+
 ## Structure
 
 - [project.godot](./project.godot): project config and `GameState` autoload
